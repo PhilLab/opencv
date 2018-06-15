@@ -322,6 +322,8 @@ public:
     Size_& operator = (const Size_& sz);
     //! the area (width*height)
     _Tp area() const;
+    //! aspect ratio (width/height)
+    double aspectRatio() const;
     //! true if empty
     bool empty() const;
 
@@ -1667,6 +1669,13 @@ _Tp Size_<_Tp>::area() const
     const _Tp result = width * height;
     CV_DbgAssert(!std::numeric_limits<_Tp>::is_integer
         || width == 0 || result / width == height); // make sure the result fits in the return value
+    return result;
+}
+
+inline
+double Size_<_Tp>::aspectRatio() const
+{
+    const double result = width / static_cast<double>(height);
     return result;
 }
 
